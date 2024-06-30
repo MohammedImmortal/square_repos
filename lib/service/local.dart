@@ -1,6 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import '../models/repository.dart';
+import 'package:square_repos/models/repository.dart';
 
 class LocalRepository {
   Database? _database;
@@ -29,9 +29,9 @@ class LocalRepository {
       await db.insert(
         'repos',
         {
-          'name': repo.name,
+          'name': repo.repoName,
           'description': repo.description,
-          'owner': repo.owner,
+          'owner': repo.ownerName,
           'isFork': repo.isFork ? 1 : 0,
           'repoUrl': repo.repoUrl,
           'ownerUrl': repo.ownerUrl,
@@ -47,9 +47,9 @@ class LocalRepository {
 
     return List.generate(maps.length, (i) {
       return RepositoryModel(
-        name: maps[i]['name'],
+        repoName: maps[i]['name'],
         description: maps[i]['description'],
-        owner: maps[i]['owner'],
+        ownerName: maps[i]['owner'],
         isFork: maps[i]['isFork'] == 1,
         repoUrl: maps[i]['repoUrl'],
         ownerUrl: maps[i]['ownerUrl'],

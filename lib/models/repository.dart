@@ -1,28 +1,28 @@
 class RepositoryModel {
-  final String name;
+  final String repoName;
   final String description;
-  final String owner;
+  final String ownerName;
   final bool isFork;
-  final Uri repoUrl;
-  final Uri ownerUrl;
+  final String repoUrl;
+  final String ownerUrl;
 
   RepositoryModel({
-    required this.name,
+    required this.repoName,
     required this.description,
-    required this.owner,
+    required this.ownerName,
     required this.isFork,
     required this.repoUrl,
     required this.ownerUrl,
   });
 
-  factory RepositoryModel.fromJson(Map<String, dynamic> repository) {
+  factory RepositoryModel.fromJson(Map<String, dynamic> json) {
     return RepositoryModel(
-      name: repository['name'],
-      description: repository['description'] ?? '',
-      owner: repository['owner']['login'],
-      isFork: repository['fork'] ?? false,
-      repoUrl: repository['html_url'],
-      ownerUrl: repository['owner']['html_url'],
+      repoName: json['name'],
+      description: json['description'] ?? '',
+      ownerName: json['owner']['login'],
+      isFork: json['fork'] ?? false,
+      repoUrl: json['html_url'],
+      ownerUrl: json['owner']['html_url'],
     );
   }
 }

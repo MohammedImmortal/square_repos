@@ -1,7 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../models/repository.dart';
-import '../service/api.dart';
-import '../service/local.dart';
+import 'package:square_repos/models/repository.dart';
+import 'package:square_repos/provider/local_repository_provider.dart';
+import 'package:square_repos/service/api.dart';
+import 'package:square_repos/service/local.dart';
 
 class RepositoryNotifier extends StateNotifier<List<RepositoryModel>> {
   final ApiRepository apiRepository;
@@ -53,6 +54,8 @@ class RepositoryNotifier extends StateNotifier<List<RepositoryModel>> {
 final repositoryProvider =
     StateNotifierProvider<RepositoryNotifier, List<RepositoryModel>>((ref) {
   final apiRepository = ApiRepository();
-  final localRepository = LocalRepository();
+  //final localRepository = LocalRepository();
+  final localRepository = ref.watch(localRepositoryProvider);
+
   return RepositoryNotifier(apiRepository, localRepository);
 });
